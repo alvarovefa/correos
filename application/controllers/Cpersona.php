@@ -31,12 +31,7 @@ class Cpersona extends CI_Controller {
 			);
 		$this->load->view('redactar', $sdata);
 	}
-	public function ver(){
-		$data = array(
-			'clientes' => $this->modelo_datos->verTodo() 
-			);
-		$this->load->view('ver', $data);
-	}
+
 
 
 

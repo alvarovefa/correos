@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/funciones.js"></script>
-
+    <title>Domus</title>
 
 <style type="text/css">
     .bs-twrapper{
@@ -151,7 +151,8 @@ function loadData() {
                         <div class="container">
                             <div class="form-group">
                                 <div class="col-md-6">
-                                    <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label>
+                                    <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label><br />
+                                    <button style="font-size: 15px; margin-left: 293px;" name="destinatarios" id="agregardes" onclick="addusers()">Agregar Selección</button>
                                     <input style="margin-left: 293px;" id="email" name="email" type="text" class="form-control" required>
                                 </div>
                             </div>
@@ -221,8 +222,7 @@ function loadData() {
                         <?php foreach ($lclientes->result() as $row) {
                             echo "<tr>";
                                 echo " <td><input type='checkbox' value=''></td>";
-                                echo "<td>".$row->nombre."</td>";
-                                echo "<td>".$row->correo."</td>";
+                                echo "<td style='font-size: 12px;'>".$row->nombre ."<br />". $row->correo."<br />".$row->observaciones."</td>";
                             echo "</tr>";
                             }
                         ?>

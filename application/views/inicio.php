@@ -10,7 +10,7 @@
 			<a href="<?=base_url() ?>Cpersona/contactos">Administrar contactos</a>
 		</li>
 		<li>
-			<a href="<?=base_url() ?>Cpersona/redactarView">Redactar Correo</a>
+			<a href="<?=base_url() ?>Cpersona/verLista">Redactar Correo</a>
 		</li>
 	</ul>
 </body>

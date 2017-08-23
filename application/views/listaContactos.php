@@ -144,6 +144,7 @@ function loadData() {
 }
 </script>
     <div class="cuerpo container">
+
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
                 <form class="form-horizontal" action="enviar.php" method="post">
@@ -225,7 +226,7 @@ function loadData() {
                 <div style="float: left;">    
                         <?php foreach ($lclientes->result() as $row) {
                             echo "<tr>";
-                                echo " <td><input type='checkbox' value=''></td>";
+                                echo " <td><input type='checkbox' id='check' onChange='test()' value=''></td>";
                                 echo "<td>".$row->nombre."</td>";
                                 echo "<td>".$row->correo."</td>";
                             echo "</tr>";
@@ -235,3 +236,16 @@ function loadData() {
             </table>
         </div>
     </div>
+    <script type="text/javascript">
+$(document).ready(function () {
+    var ckbox = $('#checkbox');
+
+    $('input').on('click',function () {
+        if (ckbox.is(':checked')) {
+            alert('You have Checked it');
+        } else {
+            alert('You Un-Checked it');
+        }
+    });
+});
+    </script>

@@ -141,7 +141,7 @@ function loadData() {
     <div class="cuerpo container" style="margin-right: 200px;">
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
-                <form class="form-horizontal" action="enviar.php" method="post">
+                <form class="form-horizontal" method="post">
                     <fieldset>
                         <h1 style="font-weight: 800; text-align: center;">Redactar correo</h1> 
                         <br>
@@ -152,7 +152,7 @@ function loadData() {
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label><br />
-                                    <button style="font-size: 15px; margin-left: 293px;" name="destinatarios" id="agregardes" onclick="addusers()">Agregar Selección</button>
+                                    <input type="button" name="agregardes" id="agregardes" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
                                     <input style="margin-left: 293px;" id="email" name="email" type="text" class="form-control" required>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@ function loadData() {
                 <div style="float: left;">    
                         <?php foreach ($lclientes->result() as $row) {
                             echo "<tr>";
-                                echo " <td><input type='checkbox' value=''></td>";
+                                echo " <td><input type='checkbox' id='check' value=".$row->correo."></td>";
                                 echo "<td style='font-size: 12px;'>".$row->nombre ."<br />". $row->correo."<br />".$row->observaciones."</td>";
                             echo "</tr>";
                             }
@@ -230,3 +230,54 @@ function loadData() {
             </table>
         </div>
     </div>
+    <script type="text/javascript">
+      /*  $(document).ready(function(){
+            var consulta;
+            //hacemos focus al campo de búsqueda
+            $("#buscar").focus();
+                                                                                                         
+            //comprobamos si se pulsa una tecla
+            $("#buscar").keyup(function(e){
+                                          
+                  //obtenemos el texto introducido en el campo de búsqueda
+                  consulta = $("#buscar").val();
+                  //hace la búsqueda                                                                                  
+                  $.ajax({
+                        type: "POST",
+                        url: "http://localhost/correos/application/models/Mbuscar.php",
+                        data: "b="+consulta,
+                        dataType: "html",
+                        beforeSend: function(){
+                        //imagen de carga
+                        $("#resultado").html("<p align='center'></p>");
+                        },
+                        error: function(){
+                        alert("error petición ajax");
+                        },
+                        success: function(data){                                                    
+                        $("#resultado").empty();
+                        $("#resultado").append(data);                                                             
+                        }
+                  });                                                                         
+            });                                                     
+        }); */
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+    // Comprobar los checkbox seleccionados
+    $('#agregardes').on('click', function() {
+
+        var seleccion = new Array();
+
+        $('input[type=checkbox]:checked').each(function() {
+            seleccion.push($(this).val());
+        });
+
+        $("#email").val(seleccion);
+
+    });
+
+});
+    </script>

@@ -15,6 +15,10 @@
 				<div>
 					<div class="panel-heading">
 						<input type="text" class="form-control" name="busqueda" placeholder="Buscar" />
+						<p>	
+							<input type="checkbox" name="check" id="checkTodos" value="">Marcar/Desmarcar Todo
+						</p>
+						<p>
 					</div>
 					<div class="panel-body" style="overflow-x: scroll; overflow-x: hidden; height: 500px; ">
 						<table style="width: 300px;" id="tbclientes" class="table table-bordered">

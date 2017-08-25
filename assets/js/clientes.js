@@ -1,13 +1,12 @@
+
 $(document).on("ready", main);
 
 
 function main(){
-	mostrarDatos("",1,5);
-
-	
+	mostrarDatos("",1);
+		
 	$("input[name=busqueda]").keyup(function(){
 		valorBuscar = $(this).val();
-		//valoroption = $("#cantidad").val();
 		mostrarDatos(valorBuscar,1);
 	});
 }
@@ -16,7 +15,7 @@ function main(){
 function mostrarDatos(valorBuscar){
 
 	$.ajax({
-		url : "http://localhost/ejemplos/clientes/mostrar",
+		url : "http://localhost/correos/Cpersona/mostrar",
 		type: "POST",
 		data: {buscar: valorBuscar},
 		dataType:"json",
@@ -25,12 +24,13 @@ function mostrarDatos(valorBuscar){
 			
 			filas = "";
 			$.each(response.clientes,function(key,item){
-				filas+="<tr><td><input type='checkbox' id='check' value="+item.email+"></td><td>"+item.nombres+"<br />"+item.email+"</td></tr>";
+				filas+="<tr><td><input type='checkbox' id='check' value="+item.correo+"></td><td>"+item.nombre+"<br />"+item.correo+"</td></tr>";
 			});
 			$("#tbclientes tbody").html(filas);
 
 		}
 	});
+
 }
 function llenarDestino(){
     // Comprobar los checkbox seleccionados
@@ -40,6 +40,6 @@ function llenarDestino(){
 	    });
 	    $("#email").val(seleccion);		   
 }
-		
+	
 
 	

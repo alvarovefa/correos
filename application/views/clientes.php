@@ -10,14 +10,13 @@
 </head>
 <body>
 	<div class="container">
-		<br>
 		<div class="row">
 			<div class="col-sx-3" style="width: 350px;">
 				<div>
 					<div class="panel-heading">
 						<input type="text" class="form-control" name="busqueda" placeholder="Buscar" />
 					</div>
-					<div>
+					<div class="panel-body" style="overflow-x: scroll; overflow-x: hidden; height: 500px; ">
 						<table style="width: 300px;" id="tbclientes" class="table table-bordered">
 							<tbody>
 								<tr>

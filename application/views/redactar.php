@@ -204,35 +204,13 @@ function loadData() {
                 </form>
             </div>
         </div>
-    </div>            
-    <div class="bs-twrapper col-md-12" style="float: left; margin-top: -600px; margin-left: 100px;">   
-
-                <div style="float: left;">    
-                        <?php $this->load->view("clientes"); ?>
-                </div>
-
+    </div>             
+    <div style="margin-top: -600px; float: left;">    
+            <?php $this->load->view("clientes"); ?>
     </div>
+
+
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.3.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/clientes.js"></script>
 
-<script type="text/javascript">
-/*
-    $(document).ready(function() {
-
-
-    // Comprobar los checkbox seleccionados
-    $('#agregardes').on('click', function() {
-
-        var seleccion = new Array();
-
-        $('input[type=checkbox]:checked').each(function() {
-            seleccion.push($(this).val());
-        });
-
-        $("#email").val(seleccion);
-
-    });
-
-});
-</script>

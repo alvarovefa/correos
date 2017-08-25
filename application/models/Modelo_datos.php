@@ -44,15 +44,7 @@ class Modelo_datos extends CI_Model {
  	$this->db->where('id', $id);
  	$this->db->update('contactos', $data);
  }
- public function buscar($query){
- 	$this->db->like('nombre', $query);
- 	$query = $this->db->get('contactos');
- 		if ($query->num_rows() > 0){
- 			return $query;
- 		}else{
- 			return false;
- 		}
- }
+
  public function mostrar($valor){
  	$this->db->like("nombre", $valor);
  	$consulta = $this->db->get("contactos");
@@ -63,4 +55,11 @@ class Modelo_datos extends CI_Model {
  		echo "No hay datos";
  	}
  }
+public function buscar($buscar)
+	{
+		$this->db->like("nombre",$buscar);
+		$this->db->select("nombre, correo");
+			$consulta = $this->db->get("contactos");
+			return $consulta->result();
+	}
 }

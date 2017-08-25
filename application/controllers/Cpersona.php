@@ -6,6 +6,7 @@ class Cpersona extends CI_Controller {
 	function __construct() {
 	    parent::__construct();	
 			$this->load->model('Mpersona');
+			$this->load->model('Modelo_datos');
 			$this->load->library('encrypt');
 	}
 
@@ -26,14 +27,20 @@ class Cpersona extends CI_Controller {
 		$this->mpersona->guardar($param);
 	}
 	public function verLista(){
-		$sdata = array(
-			'lclientes'=> $this->Mpersona->verTodol()
-			);
-		$this->load->view('redactar', $sdata);
+		
+		$this->load->view("redactar");
 		
 	}
 
-
+	public function mostrar(){	
+		//valor a Buscar
+		$buscar = $this->input->post("buscar");
+		
+		$data = array(
+			"clientes" => $this->Modelo_datos->buscar($buscar)			
+		);
+		echo json_encode($data);
+	}
 
 
 }

@@ -152,7 +152,7 @@ function loadData() {
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label><br />
-                                    <input type="button" name="agregardes" id="agregardes" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
+                                    <input type="button" name="agregardes" id="agregardes" onclick="llenarDestino()" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
                                     <input style="margin-left: 293px;" id="email" name="email" type="text" class="form-control" required>
                                 </div>
                             </div>
@@ -206,64 +206,19 @@ function loadData() {
         </div>
     </div>            
     <div class="bs-twrapper col-md-12" style="float: left; margin-top: -600px; margin-left: 100px;">   
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="input-group c-search">
-                    <input type="text" class="form-control" id="buscar">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search text-muted"></span></button>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div>
-            <table class="table table-bordered">
+
                 <div style="float: left;">    
-                        <?php foreach ($lclientes->result() as $row) {
-                            echo "<tr>";
-                                echo " <td><input type='checkbox' id='check' value=".$row->correo."></td>";
-                                echo "<td style='font-size: 12px;'>".$row->nombre ."<br />". $row->correo."<br />".$row->observaciones."</td>";
-                            echo "</tr>";
-                            }
-                        ?>
+                        <?php $this->load->view("clientes"); ?>
                 </div>
-            </table>
-        </div>
+
     </div>
-    <script type="text/javascript">
-      /*  $(document).ready(function(){
-            var consulta;
-            //hacemos focus al campo de búsqueda
-            $("#buscar").focus();
-                                                                                                         
-            //comprobamos si se pulsa una tecla
-            $("#buscar").keyup(function(e){
-                                          
-                  //obtenemos el texto introducido en el campo de búsqueda
-                  consulta = $("#buscar").val();
-                  //hace la búsqueda                                                                                  
-                  $.ajax({
-                        type: "POST",
-                        url: "http://localhost/correos/application/models/Mbuscar.php",
-                        data: "b="+consulta,
-                        dataType: "html",
-                        beforeSend: function(){
-                        //imagen de carga
-                        $("#resultado").html("<p align='center'></p>");
-                        },
-                        error: function(){
-                        alert("error petición ajax");
-                        },
-                        success: function(data){                                                    
-                        $("#resultado").empty();
-                        $("#resultado").append(data);                                                             
-                        }
-                  });                                                                         
-            });                                                     
-        }); */
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+    <script src="<?php echo base_url();?>assets/js/jquery-1.11.3.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/clientes.js"></script>
+
+<script type="text/javascript">
+/*
+    $(document).ready(function() {
 
 
     // Comprobar los checkbox seleccionados
@@ -280,4 +235,4 @@ function loadData() {
     });
 
 });
-    </script>
+</script>

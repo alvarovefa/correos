@@ -30,6 +30,7 @@ class Cpersona extends CI_Controller {
 			'lclientes'=> $this->Mpersona->verTodol()
 			);
 		$this->load->view('redactar', $sdata);
+		
 	}
 
 

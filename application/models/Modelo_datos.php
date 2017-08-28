@@ -47,6 +47,7 @@ class Modelo_datos extends CI_Model {
 
  public function mostrar($valor){
  	$this->db->like("nombre", $valor);
+
  	$consulta = $this->db->get("contactos");
 
  	if ($consulta->num_rows() > 0) {
@@ -58,6 +59,10 @@ class Modelo_datos extends CI_Model {
 public function buscar($buscar)
 	{
 		$this->db->like("nombre",$buscar);
+		$this->db->or_like("rubro",$buscar);
+		$this->db->or_like("empresa",$buscar);
+		$this->db->or_like("correo",$buscar);
+		$this->db->or_like("observaciones",$buscar);
 		$this->db->select("nombre, correo");
 			$consulta = $this->db->get("contactos");
 			return $consulta->result();

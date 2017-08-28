@@ -141,7 +141,7 @@ function loadData() {
     <div class="cuerpo container" style="margin-right: 200px;">
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
-                <form class="form-horizontal" method="post">
+                <form class="form-horizontal" method="POST" action="<?=base_url();?>Cpersona/sendMail">
                     <fieldset>
                         <h1 style="font-weight: 800; text-align: center;">Redactar correo</h1> 
                         <br>
@@ -152,8 +152,9 @@ function loadData() {
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label><br />
-                                    <input type="button" name="agregardes" id="agregardes" onclick="llenarDestino()" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
+                                    <input type="button" name="agregardes" id="agregardes" onclick="llenarDestino();correos();" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
                                     <input style="margin-left: 293px;" id="email" name="email" type="text" class="form-control" required>
+
                                 </div>
                             </div>
                             <section class="opciones">
@@ -194,8 +195,9 @@ function loadData() {
                                 </div>
                             </div>
                             <section class="opciones">
-                                <input id="fileInput" type="file" onchange="processFiles(this.files)">
+                                <input id="archivo" type="file" onchange="processFiles(this.files)">
                             </section>
+
                             <div>
                                 <input style="margin-left: 290px;" class="btn btn-primary" type="submit" name="enviar" value="Enviar">
                             </div>
@@ -213,4 +215,7 @@ function loadData() {
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.3.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/clientes.js"></script>
+    <script type="text/javascript">
+
+    </script>
 

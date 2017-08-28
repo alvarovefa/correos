@@ -27,7 +27,7 @@ function mostrarDatos(valorBuscar){
 			
 			filas = "";
 			$.each(response.clientes,function(key,item){
-				filas+="<tr><td><input type='checkbox' id='check' value="+item.correo+"></td><td>"+item.nombre+"<br />"+item.correo+"</td></tr>";
+				filas+="<tr><td><input type='checkbox' id='check' value="+item.correo+"></td><td>"+item.nombre+"<br />"+item.correo+"<br />"+item.rubro+"</td></tr>";
 			});
 			$("#tbclientes tbody").html(filas);
 
@@ -41,8 +41,9 @@ function llenarDestino(){
 	    $('input[type=checkbox][id=check]:checked').each(function() {
 	        seleccion.push($(this).val());
 	    });
-	    $("#email").val(seleccion);		   
+	    $("#email").val(seleccion);		
+
+   
 }
-	
 
 	

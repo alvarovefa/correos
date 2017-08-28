@@ -8,6 +8,11 @@ class Email extends CI_Controller {
 	    $this->load->library('email');
 	}
 	function sendMail(){
+
+		$correos = $this->input->post("destinatario");
+		var_dump($correos);
+		}
+/*
 		$this->email->from('alvaro.vergara@outlook.es', 'Alvaro Vergara');
 		$this->email->to('avergaf@gmail.com');
 
@@ -21,4 +26,4 @@ class Email extends CI_Controller {
 			echo "corre no enviado";
 		}
 	}
-}
+	*/

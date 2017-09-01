@@ -141,7 +141,7 @@ function loadData() {
     <div class="cuerpo container" style="margin-right: 200px;">
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
-                <form class="form-horizontal" method="POST" action="<?=base_url();?>Cpersona/sendMail">
+                <form class="form-horizontal" enctype='multipart/form-data' method="POST" action="<?=base_url();?>Cpersona/sendMail">
                     <fieldset>
                         <h1 style="font-weight: 800; text-align: center;">Redactar correo</h1> 
                         <br>
@@ -154,48 +154,15 @@ function loadData() {
                                     <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label><br />
                                     <input type="button" name="agregardes" id="agregardes" onclick="llenarDestino();correos();" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
                                     <input style="margin-left: 293px;" id="email" name="email" type="text" class="form-control" required>
-
                                 </div>
+                                <div class="col-md-9" style="float: right;">
+                                    <textarea id="mensaje" name="mensaje" rows="15" cols="110"></textarea>
+                                </div> 
                             </div>
                             <section class="opciones">
-                                <button onclick="document.execCommand('bold',false,'');">Negrita</button>
-                                <button onclick="document.execCommand('italic',false,'');">Cursiva</button>
-                                <button onclick="document.execCommand('underline',false,'');">Subrayado</button>
-                                    <select onchange="formatoFuente('forecolor',this[this.selectedIndex].value);this.selectedIndex=0;">
-                                        <option class="heading" selected>Color</option>
-                                        <option value="red">Rojo</option>
-                                        <option value="blue">Azul</option>
-                                        <option value="green">Verde</option>
-                                        <option value="black">Negro</option>
-                                    </select>
-                            </section>
-                            <section class="opciones">
-                                <button onclick="document.execCommand('justifyleft',false,'');">Izqda.</button>
-                                <button onclick="document.execCommand('justifycenter',false,'');">Centro</button>
-                                <button onclick="document.execCommand('justifyright',false,'');">Drcha.</button>
-                                <button onclick="document.execCommand('cut',false,'');">Cortar</button>
-                                <button onclick="document.execCommand('copy',false,'');">Copiar</button>
-                                <button onclick="document.execCommand('paste',false,'');">Pegar</button>
-                                <select onchange="formatoFuente('fontsize',this[this.selectedIndex].value);this.selectedIndex=0;">
-                                    <option class="heading" selected>Fuente</option>
-                                    <option value="1">Muy pequeña</option>
-                                    <option value="2">Pequeña</option>
-                                    <option value="3">Normal</option>
-                                    <option value="4">Media</option>
-                                    <option value="5">Grande</option>
-                                    <option value="6">Muy grande</option>
-                                    <option value="7">Enorme</option>
-                                </select>
-                            </section>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label" for="message" style="font-size: 15px;"></label>
-                                <div class="col-md-6">
-                                    <div id="textBox" contenteditable="true">
-                                    </div>
-                                </div>
-                            </div>
-                            <section class="opciones">
-                                <input id="archivo" type="file" onchange="processFiles(this.files)">
+                                <p id="msg"></p>
+                                <input type="file" id="file" name="file" />
+                                <button id="upload">Cargar</button>
                             </section>
 
                             <div>
@@ -211,11 +178,38 @@ function loadData() {
             <?php $this->load->view("clientes"); ?>
     </div>
 
-
+<script type="text/javascript">
+    function submit() {
+    var form = document.getElementById('uploadform');
+    form.submit();
+  };
+</script>
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.3.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/clientes.js"></script>
-    <script type="text/javascript">
 
-    </script>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $('#upload').on('click', function () {
+            var file_data = $('#file').prop('files')[0];
+            var form_data = new FormData();
+            form_data.append('file', file_data);
+            $.ajax({
+                url: 'localhost/Cpersona/upload_file', // point to server-side controller method
+                dataType: 'text', // what to expect back from the server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function (response) {
+                    $('#msg').html(response); // display success response from the server
+                },
+                error: function (response) {
+                    $('#msg').html(response); // display error response from the server
+                }
+            });
+        });
+    });
+</script>
 

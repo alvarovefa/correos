@@ -41,9 +41,12 @@ class Cpersona extends CI_Controller {
 		);
 		echo json_encode($data);
 	}
-	function sendMail(){
-		//$correos = $this->input->post("email");
+
+		function sendMail(){
+		$this->load->helper('path');
+
 		   $config = Array(
+
 		  'protocol' => 'smtp',
 		  'smtp_host' => 'ssl://smtp.googlemail.com',
 		  'smtp_port' => 465,
@@ -53,19 +56,40 @@ class Cpersona extends CI_Controller {
 		  'charset' => 'iso-8859-1',
 		  'wordwrap' => TRUE
 		);
-		
 
 			$this->load->library('email', $config);
 		    $to_email = $this->input->post("email");
 		    $lista = explode(',', $to_email);
-		    $adjunto = $this->input->post("archivo");
-		    
+		    $file = $this->input->post("archivo");
+		    $mensaje = $this->input->post("mensaje");
+
 		    foreach ($lista as $key => $value) {
+
+		    	$alias = $this->Modelo_datos->alias($value); 
+
+		    	//var_dump($alias['alias']);
+		    }
+		    
+		    $saludo = $alias['alias'];
+		    $enviar = $saludo." ".$mensaje;
+		   
+		   var_dump($enviar);
+		   die();
+
+
+		    foreach ($lista as $key => $value) {
+
 		        $this->email->set_newline("\r\n");
 		        $this->email->from('correopruebas@consultoramda.cl');
 		        $this->email->to($value);
 		        $this->email->subject('Prueba');
-		        $this->email->message('Hola');
+		        $this->email->message($enviar);
+
+		        $path = set_realpath('./uploads/');
+		        $test = $path.$file;
+ 
+				$this->email->attach($test);
+
 			      if($this->email->send())
 			     {
 			      echo 'Email enviado  ';
@@ -77,6 +101,37 @@ class Cpersona extends CI_Controller {
 		    }
 
 		}
-	
-
-}
+		
+	   function upload_file() {
+ 
+ 	    $this->load->helper('path');
+	    $path = set_realpath('./uploads/');
+        //upload file
+        $mi_archivo = "file";
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = '*';
+        $config['max_filename'] = '255';
+        $config['encrypt_name'] = FALSE;
+        $config['max_size'] = '1024'; //1 MB
+ 
+        if (isset($_FILES['file']['name'])) {
+            if (0 < $_FILES['file']['error']) {
+                echo 'Error durante la carga' . $_FILES['file']['error'];
+            } else {
+                if (file_exists('./uploads/' . $_FILES['file']['name'])) {
+                    echo 'Archivo ya existe : uploads/' . $_FILES['file']['name'];
+                } else {
+                    $this->load->library('upload', $config);
+                    if (!$this->upload->do_upload('file')) {
+                        echo $this->upload->display_errors();
+                    } else {
+                        echo 'Archivo cargado : ./uploads/' . $_FILES['file']['name'];
+                    }
+                }
+            }
+        } else {
+            echo 'Selecciona un archivo';
+        }
+    }
+ 
+    }

@@ -40,6 +40,18 @@ class Modelo_datos extends CI_Model {
  		}
  }
 
+ public function alias($value){
+ 	$this->db->select('alias');
+ 	$this->db->where('correo',$value);
+ 	$consulta = $this->db->get('contactos');
+
+ 	if ($consulta->num_rows() > 0) {
+ 		return $consulta->row_array();
+ 	}else{
+ 		echo "No hay datos asociados";
+ 	}
+ }
+
  public function editarContacto($id, $data){
  	$this->db->where('id', $id);
  	$this->db->update('contactos', $data);
@@ -51,10 +63,11 @@ class Modelo_datos extends CI_Model {
  	$consulta = $this->db->get("contactos");
 
  	if ($consulta->num_rows() > 0) {
- 		return $consulta;
+ 		return $consulta->result();
  	}else{
  		echo "No hay datos";
  	}
+
  }
 public function buscar($buscar)
 	{

@@ -60,9 +60,10 @@ class Cpersona extends CI_Controller {
 			$this->load->library('email', $config);
 		    $to_email = $this->input->post("email");
 		    $lista = explode(',', $to_email);
-		    $file = $this->input->post("archivo");
+		    $path = set_realpath('./uploads/adjunto.pdf');
 		    $mensaje = $this->input->post("mensaje");
-
+		    $asunto = $this->input->post("asunto");
+/*
 		    foreach ($lista as $key => $value) {
 
 		    	$alias = $this->Modelo_datos->alias($value); 
@@ -72,65 +73,72 @@ class Cpersona extends CI_Controller {
 		    
 		    $saludo = $alias['alias'];
 		    $enviar = $saludo." ".$mensaje;
-		   
-		   var_dump($enviar);
-		   die();
-
+*/
 
 		    foreach ($lista as $key => $value) {
+
+				$alias = $this->Modelo_datos->alias($value);
+			    $saludo = $alias['alias'];
+			    $enviar = $saludo." ".$mensaje;
 
 		        $this->email->set_newline("\r\n");
 		        $this->email->from('correopruebas@consultoramda.cl');
 		        $this->email->to($value);
-		        $this->email->subject('Prueba');
+		        $this->email->subject($asunto);
 		        $this->email->message($enviar);
-
-		        $path = set_realpath('./uploads/');
+/*
+		        $path = set_realpath('./uploads/mihora.sql');
 		        $test = $path.$file;
- 
-				$this->email->attach($test);
+ */
+				//$this->email->attach($path);
 
 			      if($this->email->send())
 			     {
 			      echo 'Email enviado  ';
+			      $this->load->helper("file");
+                  delete_files('./uploads/');
 			     }
 			     else
 			    {
 			     show_error($this->email->print_debugger());
+			     $this->load->helper("file");
+                 delete_files('./uploads/');
 			    }
 		    }
 
 		}
 		
-	   function upload_file() {
+    function upload_file() {
  
  	    $this->load->helper('path');
 	    $path = set_realpath('./uploads/');
+
         //upload file
-        $mi_archivo = "file";
+
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = '*';
         $config['max_filename'] = '255';
         $config['encrypt_name'] = FALSE;
-        $config['max_size'] = '1024'; //1 MB
+        $config['max_size'] = '50000';
+        $config['file_name'] = 'adjunto';
  
         if (isset($_FILES['file']['name'])) {
             if (0 < $_FILES['file']['error']) {
                 echo 'Error durante la carga' . $_FILES['file']['error'];
             } else {
                 if (file_exists('./uploads/' . $_FILES['file']['name'])) {
-                    echo 'Archivo ya existe : uploads/' . $_FILES['file']['name'];
+                    echo 'Nombre de archivo ya existe : uploads/' . $_FILES['file']['name'];
                 } else {
                     $this->load->library('upload', $config);
                     if (!$this->upload->do_upload('file')) {
                         echo $this->upload->display_errors();
                     } else {
-                        echo 'Archivo cargado : ./uploads/' . $_FILES['file']['name'];
+                        echo 'Archivo cargado con éxito! : ./uploads/' . $_FILES['file']['name'];
                     }
                 }
             }
         } else {
-            echo 'Selecciona un archivo';
+            echo 'Porfavor selecciona un archivo';
         }
     }
  

@@ -1,5 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='https://rawgit.com/markdalgleish/stellar.js/master/jquery.stellar.js'></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -154,8 +155,12 @@ function loadData() {
                                     <label style="font-size: 15px; margin-left: 293px;">Destinatarios</label><br />
                                     <input type="button" name="agregardes" id="agregardes" onclick="llenarDestino();correos();" style="font-size: 15px; margin-left: 293px;" value="Agregar Destinatarios">
                                     <input style="margin-left: 293px;" id="email" name="email" type="text" class="form-control" required>
+                                    <label style="font-size: 15px; margin-left: 293px;">Asunto</label><br />
+                                    <input style="margin-left: 293px;" type="text" class="form-control" name="asunto" id="asunto">
+                                    <label style="font-size: 15px; margin-left: 293px;">Mensaje</label><br />
                                 </div>
                                 <div class="col-md-9" style="float: right;">
+                                <label style="font-size: 15px; margin-left: 293px;"></label><br />
                                     <textarea id="mensaje" name="mensaje" rows="15" cols="110"></textarea>
                                 </div> 
                             </div>
